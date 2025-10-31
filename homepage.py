@@ -1,12 +1,5 @@
 import requests 
-from bs4 import BeautifulSoup
-from constants import HOME
-
-search = lambda term: f'{HOME}/search/{term}'
-
-def soupify(url):
-    respose = requests.get(url)
-    return BeautifulSoup(respose.text, 'html.parser')
+from soup import soupify_url as soupify, search
 
 def transform_term(term):
     return term.replace(" ", "-").lower()
@@ -36,8 +29,8 @@ def get_relevant_results(term):
         # poster image, try data-src first
         img = it.select_one(".film-poster img")
         poster = img.get("data-src") or img.get("src") if img else None
-
-        results.append({"title": title, "url": href, "year": year, "type": kind, "poster": poster})
+        media_id = href.split("-")[-1] if href else None 
+        results.append({"title": title, "url": href, "id": int(media_id), "year": year, "type": kind, "poster": poster})
     
     return results
 
