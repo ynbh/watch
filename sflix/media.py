@@ -1,4 +1,4 @@
-from soup import soupify_url as soupify
+from sflix.soup import soupify_url as soupify
 from constants import HOME 
 
 

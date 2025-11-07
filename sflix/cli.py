@@ -1,7 +1,11 @@
-from homepage import get_relevant_results
+from sflix.homepage import get_relevant_results
 from constants import HOME
-from media import get_media_info, get_episodes_for_season
-from headless import data_watch_id as fetch_data_watch_id
+from sflix.media import get_media_info, get_episodes_for_season
+from sflix.headless import (
+    data_watch_id as fetch_data_watch_id,
+    get_video_url,
+    launch_headless,
+)
 
 
 from textual.app import App
@@ -23,11 +27,11 @@ class HelpScreen(Screen):
 
 class EpisodesScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Back")]
-    def __init__(self, episodes_data, season_name=None, media_id=None, media_url=None):
+    def __init__(self, episodes_data, season_id=None, media_id=None, media_url=None):
         super().__init__()
         self.episodes_data = episodes_data
         self.media_id = media_id
-        self.season_name = season_name
+        self.season_id = season_id
         self.media_url = media_url
         
     def compose(self):
@@ -72,11 +76,14 @@ class EpisodesScreen(Screen):
         """
         
         media_url = self.media_url 
-         # internal episode ID used to lookup the episode watch id 
-        data_watch_id = await fetch_data_watch_id(media_url, id)
-        
-        # 
-        self.notify(f"{data_watch_id}")
+        # internal episode ID used to lookup the episode watch id 
+        driver = launch_headless()
+        try:
+            watch_id = fetch_data_watch_id(media_url, id, season_id=self.season_id, driver=driver)
+            video_url = get_video_url(watch_id, driver=driver)
+            self.notify(f"{watch_id} - {video_url}")
+        finally:
+            driver.quit()
 
 
     
@@ -122,7 +129,7 @@ class SeasonScreen(Screen):
         season_episodes = get_episodes_for_season(season_id)
         
         if season_episodes:
-            await self.app.push_screen(EpisodesScreen(season_episodes, season_name, self.media_id, self.media_url))
+            await self.app.push_screen(EpisodesScreen(season_episodes, season_id, self.media_id, self.media_url))
 
 class MediaScreen(App):
     

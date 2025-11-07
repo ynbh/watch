@@ -1,1 +1,0 @@
-HOME = "https://sflix.ps"

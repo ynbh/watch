@@ -1,5 +1,4 @@
-import requests 
-from soup import soupify_url as soupify, search
+from sflix.soup import soupify_url as soupify, search
 
 def transform_term(term):
     return term.replace(" ", "-").lower()
