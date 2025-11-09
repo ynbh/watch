@@ -69,6 +69,6 @@ def get_episodes(series_id, season_number):
 
     return data.get("episodes", [])
 
-GET_SHOW_EMBED = lambda tmdb_id, season_number, episode_number: f"https://www.vidking.net/embed/tv/{tmdb_id}/{season_number}/{episode_number}"
+GET_SHOW_EMBED = lambda tmdb_id, season_number, episode_number: f"https://www.vidking.net/embed/tv/{tmdb_id}/{season_number}/{episode_number}?color=e50914&episodeSelector=true"
 GET_MOVIE_EMBED = lambda tmdb_id: f"https://www.vidking.net/embed/movie/{tmdb_id}"
 

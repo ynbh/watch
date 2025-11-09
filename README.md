@@ -33,5 +33,5 @@ From the project root:
 
 You might have to update some permissions! If you don't want to do that, just run:
 ```bash 
-python vidking/cli.py
+python cli.py
 ```

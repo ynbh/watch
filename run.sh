@@ -1,2 +1,2 @@
 
-python vidking/cli.py
+python cli.py
