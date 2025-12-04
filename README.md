@@ -1,4 +1,4 @@
-# Tagger
+# watch
 
 A fast, ad-free way to search and watch shows from your terminal.
 
