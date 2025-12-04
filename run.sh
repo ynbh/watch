@@ -40,7 +40,7 @@ fi
 
 if [ "$CREATED_VENV" -eq 1 ] && [ -f "requirements.txt" ]; then
     echo "Installing dependencies..."
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
 fi
 set -euo pipefail
 

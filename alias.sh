@@ -19,7 +19,6 @@ if grep -q "alias watch=" "$CONFIG_FILE"; then
     echo "Alias 'watch' already exists in $CONFIG_FILE"
 else
     echo "" >> "$CONFIG_FILE"
-    echo "Vidking CLI Alias" >> "$CONFIG_FILE"
     echo "$ALIAS_CMD" >> "$CONFIG_FILE"
     echo "Added alias to $CONFIG_FILE"
     echo "Please run: source $CONFIG_FILE"
