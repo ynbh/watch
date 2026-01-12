@@ -43,6 +43,7 @@ Install with pipx from git:
 
 ```bash
 pipx install git+https://github.com/ynbh/watch
+watch # you want to set the token first, but it will prompt you if you dont :)
 ```
 
 ## Key bindings
