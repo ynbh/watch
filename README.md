@@ -1,29 +1,27 @@
 # watch-tmdb
 
-A fast, ad-free way to search and watch shows from your terminal.
+Search and play TMDB content from a fast, keyboard-first terminal UI.
 
 ## Demo
 
 ![Demo](demo/demo.gif)
 
-## Vidking CLI
+## What it does
 
-`vidking/cli.py` is a standalone Textual TUI that drives the full Vidking flow:
+- Textual TUI search over movies + TV (TMDB multi-search)
+- Filter results (all / movies / TV) and page through matches
+- Drill into seasons and episodes for TV shows
+- Launch a chromeless Chrome window with a sandboxed iframe player
 
-1. **SearchScreen** — enter a TMDB query without leaving the terminal  
-2. **MediaTypeScreen** — choose TV or Movie search  
-3. **ResultsOptionScreen** — browse formatted TMDB matches (titles + blurbs)  
-4. **SeasonsOptionScreen / EpisodesOptionScreen** — drill down to the exact episode, fetching fresh metadata at each step  
-5. **Playback** - launches a chromeless player window in a background thread so the TUI stays responsive; natural queueing of next items is planned  
-6. **Ad-less** - the video is rendered in a sandboxed iframe to block ad redirects
+## Requirements
+
+- Python 3.13+
+- Google Chrome (or Chromium) plus a compatible ChromeDriver for Selenium
+- TMDB API Read Access Token: <https://developer.themoviedb.org/docs/getting-started>
 
 ## Setup
 
-### TMDB API Key
-
-This tool uses TMDB for search and metadata. Follow TMDB’s “Getting Started” guide to create an **API Read Access Token**: <https://developer.themoviedb.org/docs/getting-started>
-
-Option 1: save it with the CLI:
+Option 1: save your TMDB token via the CLI (stored at `~/.config/watch-cli/config.json`):
 
 ```bash
 uv run watch set-env <your read access token>
@@ -31,7 +29,7 @@ uv run watch set-env <your read access token>
 
 Option 2: create a `.env` file in the project root:
 
-`TMDB_READ_ACCESS_TOKEN=<your read access token>` 
+`TMDB_READ_ACCESS_TOKEN=<your read access token>`
 
 ## Run
 
@@ -46,3 +44,10 @@ Install with pipx from git:
 ```bash
 pipx install git+https://github.com/ynbh/watch
 ```
+
+## Key bindings
+
+- `Enter`: select highlighted option
+- `Esc`: go back (or quit from the home screen)
+- `n` / `p`: next / previous results page
+- `a` / `m` / `t`: filter all / movies / TV
