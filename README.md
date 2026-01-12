@@ -40,5 +40,5 @@ uv run watch
 Install with pipx from git:
 
 ```bash
-pipx install git+https://github.com/you/watch-tmdb
+pipx install git+https://github.com/ynbh/watch
 ```
