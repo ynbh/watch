@@ -2,6 +2,10 @@
 
 A fast, ad-free way to search and watch shows from your terminal.
 
+## Demo
+
+<video src="demo/demo.mov" controls playsinline></video>
+
 ## Vidking CLI
 
 `vidking/cli.py` is a standalone Textual TUI that drives the full Vidking flow:
