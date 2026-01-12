@@ -4,7 +4,7 @@ A fast, ad-free way to search and watch shows from your terminal.
 
 ## Demo
 
-<video src="demo/demo.mov" controls playsinline></video>
+![Demo](demo/demo.gif)
 
 ## Vidking CLI
 
