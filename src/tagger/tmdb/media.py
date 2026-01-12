@@ -1,9 +1,10 @@
-from ..constants import TMDB, SEARCH_TV, SEARCH_MOVIE, FIND_TV, FIND_TV_EPISODES
+from ..constants import TMDB, SEARCH_MULTI, FIND_TV, FIND_TV_EPISODES
 import requests
 from requests.exceptions import ConnectionError, Timeout, RequestException
 from urllib.parse import quote
 from dotenv import load_dotenv
 import os
+from ..config import load_api_token
 
 load_dotenv()
 
@@ -31,9 +32,11 @@ class TMDBResponseError(TMDBError):
 def _get_api_token():
     token = os.getenv("TMDB_READ_ACCESS_TOKEN")
     if not token:
+        token = load_api_token()
+    if not token:
         raise TMDBAuthError(
-            "TMDB_READ_ACCESS_TOKEN not found in environment. "
-            "Please set it in your .env file."
+            "TMDB_READ_ACCESS_TOKEN not found. "
+            "Set it via .env or `watch set-env <token>`."
         )
     return token
 
@@ -83,38 +86,42 @@ def _make_request(url: str) -> dict:
         raise TMDBResponseError(f"Invalid JSON response from TMDB: {e}") from e
 
 
-def search(url, search_term: str, tv: bool):
+def search_multi(search_term: str, page: int = 1):
     encoded_query = quote(search_term)
-    full_url = f"{TMDB}{url}?query={encoded_query}&include_adult=true&page=1"
+    full_url = f"{TMDB}{SEARCH_MULTI}?query={encoded_query}&include_adult=true&page={page}"
 
     data = _make_request(full_url)
     results = []
 
     for item in data.get("results", []):
-        name = item.get("name") or item.get("title")
+        media_type = item.get("media_type")
+        if media_type == "person":
+            continue
+
+        name = item.get("name") or item.get("title") or "Untitled"
         overview = item.get("overview")
         tmdb_id = item.get("id")
         release = item.get("release_date") or item.get("first_air_date")
+        rating = item.get("vote_average")
+        popularity = item.get("popularity")
 
         results.append(
             {
                 "name": name,
                 "overview": overview,
                 "id": tmdb_id,
-                "media_type": "tv" if tv else "movie",
+                "media_type": media_type,
                 "release_date": release,
+                "rating": rating,
+                "popularity": popularity,
             }
         )
 
-    return results
-
-
-def search_tv_shows(search_term: str):
-    return search(SEARCH_TV, search_term, tv=True)
-
-
-def search_movies(search_term: str):
-    return search(SEARCH_MOVIE, search_term, tv=False)
+    return {
+        "results": results,
+        "page": data.get("page", page),
+        "total_pages": data.get("total_pages", 1),
+    }
 
 
 def get_seasons(series_id):

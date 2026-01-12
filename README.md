@@ -1,4 +1,4 @@
-# watch
+# watch-tmdb
 
 A fast, ad-free way to search and watch shows from your terminal.
 
@@ -19,7 +19,13 @@ A fast, ad-free way to search and watch shows from your terminal.
 
 This tool uses TMDB for search and metadata. Follow TMDB’s “Getting Started” guide to create an **API Read Access Token**: <https://developer.themoviedb.org/docs/getting-started>
 
-Create a `.env` file in the project root:
+Option 1: save it with the CLI:
+
+```bash
+uv run watch set-env <your read access token>
+```
+
+Option 2: create a `.env` file in the project root:
 
 `TMDB_READ_ACCESS_TOKEN=<your read access token>` 
 
@@ -28,10 +34,11 @@ Create a `.env` file in the project root:
 From the project root:
 
 ```bash
-./run.sh
+uv run watch
 ```
 
-You might have to update some permissions! If you don't want to do that, just run:
-```bash 
-python cli.py
+Install with pipx from git:
+
+```bash
+pipx install git+https://github.com/you/watch-tmdb
 ```

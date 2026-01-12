@@ -1,16 +1,21 @@
 [project]
-name = "tagger"
+name = "watch-tmdb"
 version = "0.1.0"
-description = "Add your description here"
+description = "Search and play TMDB content from the terminal."
 readme = "README.md"
 requires-python = ">=3.13"
+license = { text = "MIT" }
 dependencies = [
     "python-dotenv>=1.2.1",
     "requests>=2.32.5",
     "rich>=14.2.0",
     "selenium>=4.39.0",
+    "typer>=0.15.4",
     "textual>=6.8.0",
 ]
+
+[project.scripts]
+watch = "tagger.entry:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/tagger"]
