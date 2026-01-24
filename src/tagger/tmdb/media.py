@@ -104,6 +104,7 @@ def search_multi(search_term: str, page: int = 1):
         release = item.get("release_date") or item.get("first_air_date")
         rating = item.get("vote_average")
         popularity = item.get("popularity")
+        poster_path = item.get("poster_path")
 
         results.append(
             {
@@ -114,6 +115,7 @@ def search_multi(search_term: str, page: int = 1):
                 "release_date": release,
                 "rating": rating,
                 "popularity": popularity,
+                "poster_path": poster_path,
             }
         )
 

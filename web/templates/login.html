@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Watch - Login</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body class="page page-login">
+  <main class="card">
+    <div class="brand">
+      <span class="brand-mark">watch</span>
+      <span class="brand-sub">tmdb web</span>
+    </div>
+    <h1>Enter the room</h1>
+    <p class="muted">This site is password gated.</p>
+    <form class="login-form" method="post" action="/login">
+      <label class="field">
+        <span class="field-label">Password</span>
+        <input name="password" type="password" autofocus autocomplete="current-password" />
+      </label>
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+      <button class="btn" type="submit">Unlock</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Watch - TMDB Web</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body class="page">
+  <div class="frame">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">watch</span>
+        <span class="brand-sub">keyboard-first tmdb</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn ghost" id="cmdk-button" type="button">Cmd+K</button>
+        <form action="/logout" method="post">
+          <button class="btn ghost" type="submit">Logout</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="pane pane-list">
+        <div class="pane-header">
+          <h1 id="context-title">Search to begin</h1>
+          <p id="context-sub">Cmd+K to open the command bar.</p>
+        </div>
+        <ul class="list" id="list"></ul>
+      </section>
+
+      <section class="pane pane-player">
+        <div class="player-shell" id="player-shell">
+          <div class="player-placeholder" id="player-placeholder">
+            <p>Pick a title to start playback.</p>
+            <p class="muted">Movies launch instantly. TV shows go season -> episode.</p>
+          </div>
+          <iframe id="player" title="watch-player" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="hint-bar">
+          <span>Enter: select</span>
+          <span>Esc: back</span>
+          <span>A/M/T: filter</span>
+          <span>N/P: page</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="cmdk" id="cmdk" aria-hidden="true">
+    <div class="cmdk-card">
+      <div class="cmdk-head">
+        <span class="cmdk-title">Command Bar</span>
+        <span class="cmdk-shortcut">Cmd+K</span>
+      </div>
+      <input id="cmdk-input" type="text" placeholder="Search TMDB (movies, TV)..." autocomplete="off" />
+      <p class="cmdk-help">Enter to search. Esc to close.</p>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
