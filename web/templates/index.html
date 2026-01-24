@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Watch - TMDB Web</title>
   <link rel="stylesheet" href="/static/app.css" />
 </head>
+
 <body class="page">
   <div class="frame">
     <header class="topbar">
@@ -36,7 +38,8 @@
             <p>Pick a title to start playback.</p>
             <p class="muted">Movies launch instantly. TV shows go season -> episode.</p>
           </div>
-          <iframe id="player" title="watch-player" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"></iframe>
+          <iframe id="player" title="watch-player" allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+            allowfullscreen referrerpolicy="origin"></iframe>
         </div>
         <div class="hint-bar">
           <span>Enter: select</span>
@@ -61,4 +64,5 @@
 
   <script src="/static/app.js"></script>
 </body>
+
 </html>

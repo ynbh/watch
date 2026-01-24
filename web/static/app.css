@@ -436,7 +436,6 @@ input[type="password"]:focus {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1;
     gap: 16px;
     align-items: stretch;
   }
@@ -448,20 +447,24 @@ input[type="password"]:focus {
 
   .pane-list {
     order: 1;
-    flex: 1 1 0;
-    min-height: 0;
+    flex: 0 0 auto;
     max-height: none;
-    overflow: hidden;
+    overflow: visible;
+  }
+
+  .pane-list .list {
+    overflow: visible;
+    max-height: none;
   }
 
   .player-shell {
-    min-height: 220px;
+    min-height: 180px;
   }
 
   .frame {
     display: flex;
     flex-direction: column;
-    min-height: 100svh;
+    min-height: auto;
   }
 
   .pane {
